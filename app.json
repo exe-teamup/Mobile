@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "MyApp",
-    "slug": "MyApp",
+    "name": "EXE Team Up",
+    "slug": "exe-teamup",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "exe-teamup",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
