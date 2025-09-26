@@ -1,6 +1,12 @@
-import React from "react";
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ProfileSection({
   profile,
@@ -46,36 +52,43 @@ export default function ProfileSection({
       </View>
       <View style={styles.card}>
         <Text style={styles.label}>Contact</Text>
-        <FlatList
-          data={profile.contact}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 2 }}>
-              {isEditing ? (
-                <>
-                  <TextInput
-                    value={item.icon}
-                    onChangeText={text => onUpdateContact(item.id, "icon", text)}
-                    style={styles.input}
-                  />
-                  <TextInput
-                    value={item.link}
-                    onChangeText={text => onUpdateContact(item.id, "link", text)}
-                    style={styles.input}
-                  />
-                  <TouchableOpacity onPress={() => onRemoveContact(item.id)}>
-                    <Icon name="trash" size={18} color="#FF7A00" />
-                  </TouchableOpacity>
-                </>
-              ) : (
-                <>
-                  <Icon name={item.icon} size={18} style={{ width: 30 }} />
-                  <Text style={{ marginLeft: 5 }}>{item.link}</Text>
-                </>
-              )}
-            </View>
-          )}
-        />
+        {profile.contact.map((item) => (
+          <View
+            key={item.id}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginVertical: 2,
+            }}
+          >
+            {isEditing ? (
+              <>
+                <TextInput
+                  value={item.icon}
+                  onChangeText={(text) =>
+                    onUpdateContact(item.id, 'icon', text)
+                  }
+                  style={styles.input}
+                />
+                <TextInput
+                  value={item.link}
+                  onChangeText={(text) =>
+                    onUpdateContact(item.id, 'link', text)
+                  }
+                  style={styles.input}
+                />
+                <TouchableOpacity onPress={() => onRemoveContact(item.id)}>
+                  <Icon name="trash" size={18} color="#FF7A00" />
+                </TouchableOpacity>
+              </>
+            ) : (
+              <>
+                <Icon name={item.icon} size={18} style={{ width: 30 }} />
+                <Text style={{ marginLeft: 5 }}>{item.link}</Text>
+              </>
+            )}
+          </View>
+        ))}
         {isEditing && (
           <TouchableOpacity onPress={onAddContact} style={styles.addButton}>
             <Icon name="plus" size={18} color="#FF7A00" />
@@ -86,24 +99,29 @@ export default function ProfileSection({
       <View style={styles.card}>
         <Text style={styles.label}>Skills</Text>
         {isEditing ? (
-          <FlatList
-            data={profile.skills}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 2 }}>
+          <>
+            {profile.skills.map((item, index) => (
+              <View
+                key={index}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginVertical: 2,
+                }}
+              >
                 <TextInput
                   value={item}
-                  onChangeText={text => onUpdateSkills(index, text)}
+                  onChangeText={(text) => onUpdateSkills(index, text)}
                   style={styles.input}
                 />
                 <TouchableOpacity onPress={() => onRemoveSkill(index)}>
                   <Icon name="trash" size={18} color="#FF7A00" />
                 </TouchableOpacity>
               </View>
-            )}
-          />
+            ))}
+          </>
         ) : (
-          <Text>{profile.skills.join(", ")}</Text>
+          <Text>{profile.skills.join(', ')}</Text>
         )}
         {isEditing && (
           <TouchableOpacity onPress={onAddSkill} style={styles.addButton}>
@@ -115,24 +133,29 @@ export default function ProfileSection({
       <View style={styles.card}>
         <Text style={styles.label}>Interested</Text>
         {isEditing ? (
-          <FlatList
-            data={profile.interested}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 2 }}>
+          <>
+            {profile.interested.map((item, index) => (
+              <View
+                key={index}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginVertical: 2,
+                }}
+              >
                 <TextInput
                   value={item}
-                  onChangeText={text => onUpdateInterests(index, text)}
+                  onChangeText={(text) => onUpdateInterests(index, text)}
                   style={styles.input}
                 />
                 <TouchableOpacity onPress={() => onRemoveInterest(index)}>
                   <Icon name="trash" size={18} color="#FF7A00" />
                 </TouchableOpacity>
               </View>
-            )}
-          />
+            ))}
+          </>
         ) : (
-          <Text>{profile.interested.join(", ")}</Text>
+          <Text>{profile.interested.join(', ')}</Text>
         )}
         {isEditing && (
           <TouchableOpacity onPress={onAddInterest} style={styles.addButton}>
@@ -151,11 +174,38 @@ export default function ProfileSection({
 
 const styles = StyleSheet.create({
   container: { padding: 16 },
-  card: { backgroundColor: "#fff", borderRadius: 14, padding: 14, marginBottom: 10 },
-  label: { fontWeight: "bold", marginBottom: 6, color: "#333" },
-  input: { borderBottomWidth: 1, borderColor: "#333", flex: 1, marginRight: 10 },
-  logoutBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 18, backgroundColor: "#FFF3E0", padding: 10, borderRadius: 12 },
-  logoutText: { color: "#FF7A00", marginLeft: 6, fontWeight: "bold" },
-  addButton: { flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 8, padding: 8, borderWidth: 1, borderColor: "#FF7A00", borderRadius: 8 },
-  addText: { color: "#FF7A00", marginLeft: 6 },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    padding: 14,
+    marginBottom: 10,
+  },
+  label: { fontWeight: 'bold', marginBottom: 6, color: '#333' },
+  input: {
+    borderBottomWidth: 1,
+    borderColor: '#333',
+    flex: 1,
+    marginRight: 10,
+  },
+  logoutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 18,
+    backgroundColor: '#FFF3E0',
+    padding: 10,
+    borderRadius: 12,
+  },
+  logoutText: { color: '#FF7A00', marginLeft: 6, fontWeight: 'bold' },
+  addButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#FF7A00',
+    borderRadius: 8,
+  },
+  addText: { color: '#FF7A00', marginLeft: 6 },
 });
