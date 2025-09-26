@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { View, ScrollView, Alert } from "react-native";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileSection from "@/components/ProfileSection";
 import ProfileStatusModal from "@/components/ProfileStatusModal";
+import React, { useState } from "react";
+import { Alert, ScrollView, View } from "react-native";
+import avatarImg from "../../assets/images/dembele.jpg";
 
 const MOCK_PROFILE = {
-  avatar: "https://randomuser.me/api/portraits/men/11.jpg",
+  avatar: avatarImg,
   name: "Nguyễn Văn An",
   major: "Kỹ Thuật Phần Mềm",
   bio: "Tôi là một người đam mê công nghệ!",
@@ -16,7 +17,7 @@ const MOCK_PROFILE = {
   ],
   skills: "Python, AWS, Redis, Docker, mySQL, Linux",
   interested: "Website, AI in production, Research",
-  status: "mặc định", // "đang tìm nhóm", "đã có nhóm", "mặc định"
+  status: "mặc định",
 };
 
 export default function HomeScreen() {

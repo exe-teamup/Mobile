@@ -8,7 +8,7 @@ export default function ModalScreen() {
   return (
     <ThemedView style={styles.container}>
       <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
+      <Link href="/modal" dismissTo style={styles.link}>
         <ThemedText type="link">Go to home screen</ThemedText>
       </Link>
     </ThemedView>
@@ -27,3 +27,5 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
+
+const avatarImg = '../../assets/images/dembele.jpg';

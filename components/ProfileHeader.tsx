@@ -1,6 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 export default function ProfileHeader({
   avatar,
   name,
@@ -19,7 +20,7 @@ export default function ProfileHeader({
   return (
     <View style={styles.header}>
       <View style={styles.orangeBg} />
-      <Image source={{ uri: avatar }} style={styles.avatar} />
+      <Image source={typeof avatar === "string" ? { uri: avatar } : avatar} style={styles.avatar} />
       <Text style={styles.name}>
         {name}{" "}
         <TouchableOpacity onPress={onStatusPress}>
