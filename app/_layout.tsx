@@ -9,9 +9,6 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
-// Tạo lỗi để test husky
-const unusedVariable = 'test';
-
 export const unstable_settings = {
   anchor: '(tabs)',
 };
