@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Animated, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Swipeable } from "react-native-gesture-handler";
 
 const NOTIFICATION_FILTERS = [
   { label: "Tất cả", value: "all" },
@@ -29,11 +30,44 @@ const MOCK_NOTIFICATIONS = [
 export default function NotificationScreen() {
   const [filter, setFilter] = useState("all");
   const [showFilter, setShowFilter] = useState(false);
+  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
 
-  const notifications =
+  const notificationsFiltered =
     filter === "all"
-      ? MOCK_NOTIFICATIONS
-      : MOCK_NOTIFICATIONS.filter((n) => n.type === filter);
+      ? notifications
+      : notifications.filter((n) => n.type === filter);
+
+  const markAsRead = (id: string) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+    );
+  };
+
+  const deleteNotification = (id: string) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
+
+  const renderRightActions = (
+    progress: Animated.AnimatedInterpolation<number>,
+    dragX: Animated.AnimatedInterpolation<number>,
+    id: string
+  ) => (
+    <TouchableOpacity style={styles.deleteBtn} onPress={() => deleteNotification(id)}>
+      <MaterialIcons name="delete" size={24} color="#fff" />
+      <Text style={{ color: "#fff" }}>Xoá</Text>
+    </TouchableOpacity>
+  );
+
+  const renderLeftActions = (
+    progress: Animated.AnimatedInterpolation<number>,
+    dragX: Animated.AnimatedInterpolation<number>,
+    id: string
+  ) => (
+    <TouchableOpacity style={styles.readBtn} onPress={() => markAsRead(id)}>
+      <MaterialIcons name="done" size={24} color="#fff" />
+      <Text style={{ color: "#fff" }}>Đã đọc</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -78,7 +112,7 @@ export default function NotificationScreen() {
       </View>
 
       {/* Notifications */}
-      {notifications.length === 0 ? (
+      {notificationsFiltered.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyTitle}>No notifications</Text>
           <Text style={styles.emptyDesc}>
@@ -88,30 +122,35 @@ export default function NotificationScreen() {
         </View>
       ) : (
         <FlatList
-          data={notifications}
+          data={notificationsFiltered}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
           renderItem={({ item }) => (
-            <View
-              style={[
-                styles.notificationCard,
-                { backgroundColor: item.read ? "#E6F4EA" : "#E3F0FF" },
-              ]}
+            <Swipeable
+              renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item.id)}
+              renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id)}
             >
-              <MaterialIcons
-                name="notifications"
-                size={22}
-                color={item.read ? "#4CAF50" : "#1976D2"}
-                style={{ marginRight: 8 }}
-              />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.notificationText}>{item.title}</Text>
-                <Text style={styles.notificationTime}>{item.time}</Text>
+              <View
+                style={[
+                  styles.notificationCard,
+                  { backgroundColor: item.read ? "#E6F4EA" : "#E3F0FF" },
+                ]}
+              >
+                <MaterialIcons
+                  name={item.read ? "check-circle" : "notifications"}
+                  size={22}
+                  color={item.read ? "#4CAF50" : "#1976D2"}
+                  style={{ marginRight: 8 }}
+                />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.notificationText}>{item.title}</Text>
+                  <Text style={styles.notificationTime}>{item.time}</Text>
+                </View>
+                <TouchableOpacity onPress={() => deleteNotification(item.id)}>
+                  <MaterialIcons name="more-vert" size={22} color="#888" />
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity>
-                <MaterialIcons name="more-vert" size={22} color="#888" />
-              </TouchableOpacity>
-            </View>
+            </Swipeable>
           )}
         />
       )}
@@ -185,4 +224,20 @@ const styles = StyleSheet.create({
   },
   emptyTitle: { fontWeight: "bold", fontSize: 18, marginBottom: 8 },
   emptyDesc: { color: "#888", marginBottom: 12 },
+  deleteBtn: {
+    backgroundColor: "#FF5252",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    borderRadius: 12,
+    marginVertical: 10,
+  },
+  readBtn: {
+    backgroundColor: "#4CAF50",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    borderRadius: 12,
+    marginVertical: 10,
+  },
 });
