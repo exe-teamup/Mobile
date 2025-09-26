@@ -1,11 +1,14 @@
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function ProfileHeader({
   avatar,
   name,
   major,
+  isEditing,
+  onNameChange,
+  onMajorChange,
   status,
   onEdit,
   onStatusPress,
@@ -13,6 +16,9 @@ export default function ProfileHeader({
   avatar: string;
   name: string;
   major: string;
+  isEditing: boolean;
+  onNameChange: (text: string) => void;
+  onMajorChange: (text: string) => void;
   status: string;
   onEdit: () => void;
   onStatusPress: () => void;
@@ -22,15 +28,37 @@ export default function ProfileHeader({
       <View style={styles.orangeBg} />
       <Image source={typeof avatar === "string" ? { uri: avatar } : avatar} style={styles.avatar} />
       <Text style={styles.name}>
-        {name}{" "}
-        <TouchableOpacity onPress={onStatusPress}>
-          <MaterialIcons name="arrow-drop-down" size={20} />
-        </TouchableOpacity>
+        {isEditing ? (
+          <TextInput
+            value={name}
+            onChangeText={onNameChange}
+            style={styles.input}
+            autoCapitalize="words"
+          />
+        ) : (
+          <>
+            {name}{" "}
+            <TouchableOpacity onPress={onStatusPress}>
+              <MaterialIcons name="arrow-drop-down" size={20} />
+            </TouchableOpacity>
+          </>
+        )}
       </Text>
-      <Text style={styles.major}>{major}</Text>
+      <Text style={styles.major}>
+        {isEditing ? (
+          <TextInput
+            value={major}
+            onChangeText={onMajorChange}
+            style={styles.input}
+            autoCapitalize="words"
+          />
+        ) : (
+          major
+        )}
+      </Text>
       <TouchableOpacity style={styles.editBtn} onPress={onEdit}>
         <MaterialIcons name="edit" size={18} color="#FF7A00" />
-        <Text style={styles.editText}>Chỉnh sửa</Text>
+        <Text style={styles.editText}>{isEditing ? "Lưu" : "Chỉnh sửa"}</Text>
       </TouchableOpacity>
       {status === "đang tìm nhóm" && (
         <View style={styles.statusTag}>
@@ -50,5 +78,6 @@ const styles = StyleSheet.create({
   major: { color: "#888", marginBottom: 10 },
   editBtn: { flexDirection: "row", alignItems: "center", backgroundColor: "#FFF3E0", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 6, marginTop: 4 },
   editText: { color: "#FF7A00", marginLeft: 5, fontWeight: "bold" },
+  input: { borderBottomWidth: 1, borderColor: "#FF7A00", color: "#000", textAlign: "center", fontWeight: "bold", fontSize: 20 },
   statusTag: { flexDirection: "row", alignItems: "center", marginTop: 6 },
 });
