@@ -1,26 +1,33 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const AVAILABLE_SKILLS = [
-  "Graphic Design",
-  "Graphic Thinking",
-  "Ui/UX Design",
-  "Adobe Indesign",
-  "Web Design",
-  "InDesign",
-  "Canva Design",
-  "User Interface Design",
-  "Product Design",
-  "User Experience Design",
+  'Graphic Design',
+  'Graphic Thinking',
+  'Ui/UX Design',
+  'Adobe Indesign',
+  'Web Design',
+  'InDesign',
+  'Canva Design',
+  'User Interface Design',
+  'Product Design',
+  'User Experience Design',
 ];
 
 export default function SkillSelectScreen() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Lọc kỹ năng theo search và loại bỏ đã chọn
   const filteredSkills = AVAILABLE_SKILLS.filter(
     (skill) =>
       skill.toLowerCase().includes(search.toLowerCase()) &&
@@ -29,7 +36,7 @@ export default function SkillSelectScreen() {
 
   const handleAddSkill = (skill: string) => {
     setSelected([...selected, skill]);
-    setSearch("");
+    setSearch('');
   };
 
   const handleRemoveSkill = (skill: string) => {
@@ -41,14 +48,10 @@ export default function SkillSelectScreen() {
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      "Xác nhận",
-      "Bạn có chắc chắn muốn đăng xuất?",
-      [
-        { text: "Huỷ", style: "cancel" },
-        { text: "Đăng xuất", style: "destructive", onPress: handleLogout }
-      ]
-    );
+    Alert.alert('Xác nhận', 'Bạn có chắc chắn muốn đăng xuất?', [
+      { text: 'Huỷ', style: 'cancel' },
+      { text: 'Đăng xuất', style: 'destructive', onPress: handleLogout },
+    ]);
   };
 
   return (
@@ -66,7 +69,7 @@ export default function SkillSelectScreen() {
           onChangeText={setSearch}
         />
         {search.length > 0 && (
-          <TouchableOpacity onPress={() => setSearch("")}>
+          <TouchableOpacity onPress={() => setSearch('')}>
             <MaterialIcons name="close" size={20} color="#888" />
           </TouchableOpacity>
         )}
@@ -101,10 +104,7 @@ export default function SkillSelectScreen() {
       />
 
       {/* Edit Button */}
-      <TouchableOpacity
-        style={styles.editBtn}
-        onPress={handleEdit}
-      >
+      <TouchableOpacity style={styles.editBtn} onPress={handleEdit}>
         <Text style={styles.editText}>Sửa</Text>
       </TouchableOpacity>
 
@@ -114,10 +114,7 @@ export default function SkillSelectScreen() {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity
-        style={styles.logoutBtn}
-        onPress={handleLogout}
-      >
+      <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <MaterialIcons name="logout" size={20} color="#FF7A00" />
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
@@ -126,12 +123,17 @@ export default function SkillSelectScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 24 },
-  header: { fontWeight: "bold", fontSize: 18, marginLeft: 16, marginBottom: 12 },
+  container: { flex: 1, backgroundColor: '#fff', paddingTop: 24 },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginLeft: 16,
+    marginBottom: 12,
+  },
   searchBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F4F4',
     borderRadius: 12,
     marginHorizontal: 16,
     paddingHorizontal: 12,
@@ -139,15 +141,15 @@ const styles = StyleSheet.create({
   },
   input: { flex: 1, marginLeft: 8, fontSize: 16 },
   selectedWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginHorizontal: 16,
     marginBottom: 8,
   },
   selectedSkill: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F4F4',
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -158,34 +160,39 @@ const styles = StyleSheet.create({
   skillItem: {
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: '#eee',
   },
   editBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FF7A00",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FF7A00',
     borderRadius: 24,
     paddingHorizontal: 32,
     paddingVertical: 12,
     marginTop: 8,
   },
-  editText: { color: "#fff", marginLeft: 8, fontWeight: "bold", fontSize: 16 },
+  editText: { color: '#fff', marginLeft: 8, fontWeight: 'bold', fontSize: 16 },
   sectionEditBtn: {
-    position: "absolute",
+    position: 'absolute',
     top: 10,
     right: 10,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: '#F4F4F4',
     borderRadius: 12,
     padding: 8,
   },
   logoutBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FF7A00",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FF7A00',
     borderRadius: 24,
     paddingHorizontal: 32,
     paddingVertical: 12,
     marginTop: 8,
   },
-  logoutText: { color: "#fff", marginLeft: 8, fontWeight: "bold", fontSize: 16 },
+  logoutText: {
+    color: '#fff',
+    marginLeft: 8,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });

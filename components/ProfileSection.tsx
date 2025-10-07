@@ -8,6 +8,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+interface Profile {
+  bio: string;
+  contact: { id: string; icon: string; link: string }[];
+  skills: string[];
+  interested: string[];
+}
 export default function ProfileSection({
   profile,
   isEditing,
@@ -22,7 +28,7 @@ export default function ProfileSection({
   onAddInterest,
   onRemoveInterest,
 }: {
-  profile: any;
+  profile: Profile;
   isEditing: boolean;
   onUpdateBio: (text: string) => void;
   onUpdateContact: (id: string, field: string, value: string) => void;

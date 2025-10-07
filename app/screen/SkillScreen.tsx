@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,43 +7,42 @@ import {
   TextInput,
   FlatList,
   Modal,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const ALL_SKILLS = [
-  "Graphic Design",
-  "Graphic Thinking",
-  "Ui/UX Design",
-  "Adobe Indesign",
-  "Web Design",
-  "InDesign",
-  "Canva Design",
-  "User Interface Design",
-  "Product Design",
-  "User Experience Design",
-  "Leadership",
-  "Teamwork",
-  "Visioner",
-  "Target oriented",
-  "Consistent",
-  "Good communication skills",
-  "English",
+  'Graphic Design',
+  'Graphic Thinking',
+  'Ui/UX Design',
+  'Adobe Indesign',
+  'Web Design',
+  'InDesign',
+  'Canva Design',
+  'User Interface Design',
+  'Product Design',
+  'User Experience Design',
+  'Leadership',
+  'Teamwork',
+  'Visioner',
+  'Target oriented',
+  'Consistent',
+  'Good communication skills',
+  'English',
 ];
 
 export default function SkillScreen() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<string[]>([
-    "Leadership",
-    "Teamwork",
-    "Visioner",
-    "Target oriented",
-    "Consistent",
-    "Good communication skills",
-    "English",
+    'Leadership',
+    'Teamwork',
+    'Visioner',
+    'Target oriented',
+    'Consistent',
+    'Good communication skills',
+    'English',
   ]);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // Lọc kỹ năng theo search và loại bỏ đã chọn
   const filteredSkills = ALL_SKILLS.filter(
     (skill) =>
       skill.toLowerCase().includes(search.toLowerCase()) &&
@@ -52,7 +51,7 @@ export default function SkillScreen() {
 
   const handleAddSkill = (skill: string) => {
     setSelected([...selected, skill]);
-    setSearch("");
+    setSearch('');
   };
 
   const handleRemoveSkill = (skill: string) => {
@@ -79,7 +78,7 @@ export default function SkillScreen() {
           onChangeText={setSearch}
         />
         {search.length > 0 && (
-          <TouchableOpacity onPress={() => setSearch("")}>
+          <TouchableOpacity onPress={() => setSearch('')}>
             <MaterialIcons name="close" size={20} color="#888" />
           </TouchableOpacity>
         )}
@@ -131,13 +130,14 @@ export default function SkillScreen() {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Bạn có chắc chắn cập nhật không?</Text>
-            <View style={{ flexDirection: "row", marginTop: 20 }}>
+            <Text style={styles.modalTitle}>
+              Bạn có chắc chắn cập nhật không?
+            </Text>
+            <View style={{ flexDirection: 'row', marginTop: 20 }}>
               <TouchableOpacity
                 style={styles.confirmBtn}
                 onPress={() => {
                   setShowConfirm(false);
-                  // TODO: Gọi API cập nhật kỹ năng ở đây
                 }}
               >
                 <Text style={styles.confirmBtnText}>CẬP NHẬT</Text>
@@ -157,18 +157,18 @@ export default function SkillScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 24 },
+  container: { flex: 1, backgroundColor: '#fff', paddingTop: 24 },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingBottom: 8,
   },
-  headerTitle: { fontWeight: "bold", fontSize: 18, marginLeft: 8 },
+  headerTitle: { fontWeight: 'bold', fontSize: 18, marginLeft: 8 },
   searchBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F4F4',
     borderRadius: 12,
     margin: 16,
     paddingHorizontal: 12,
@@ -176,15 +176,15 @@ const styles = StyleSheet.create({
   },
   input: { flex: 1, marginLeft: 8, fontSize: 16 },
   selectedWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginHorizontal: 16,
     marginBottom: 8,
   },
   selectedSkill: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F4F4',
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -195,43 +195,43 @@ const styles = StyleSheet.create({
   skillItem: {
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: '#eee',
   },
   saveBtn: {
-    backgroundColor: "#FF7A00",
+    backgroundColor: '#FF7A00',
     borderRadius: 12,
     margin: 16,
     paddingVertical: 14,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  saveBtnText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
+  saveBtnText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.15)",
-    justifyContent: "flex-end",
+    backgroundColor: 'rgba(0,0,0,0.15)',
+    justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 24,
-    alignItems: "center",
+    alignItems: 'center',
   },
-  modalTitle: { fontWeight: "bold", fontSize: 16, textAlign: "center" },
+  modalTitle: { fontWeight: 'bold', fontSize: 16, textAlign: 'center' },
   confirmBtn: {
-    backgroundColor: "#FF7A00",
+    backgroundColor: '#FF7A00',
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 24,
     marginRight: 12,
   },
-  confirmBtnText: { color: "#fff", fontWeight: "bold" },
+  confirmBtnText: { color: '#fff', fontWeight: 'bold' },
   cancelBtn: {
-    backgroundColor: "#F4F4F4",
+    backgroundColor: '#F4F4F4',
     borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 24,
   },
-  cancelBtnText: { color: "#888", fontWeight: "bold" },
+  cancelBtnText: { color: '#888', fontWeight: 'bold' },
 });
