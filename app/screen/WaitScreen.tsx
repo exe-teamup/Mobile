@@ -45,7 +45,7 @@ export default function WaitScreen({
     const timeout = setTimeout(() => {
       try {
         router.replace('/');
-      } catch (e) {
+      } catch {
         router.push('/');
       }
     }, duration);

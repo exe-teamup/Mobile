@@ -46,7 +46,7 @@ export default function SplashScreen() {
     // replace so user can't go back
     try {
       router.replace('/');
-    } catch (e) {
+    } catch {
       router.push('/');
     }
   };
