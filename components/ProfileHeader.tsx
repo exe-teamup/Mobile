@@ -72,16 +72,28 @@ export default function ProfileHeader({
           {isEditing ? 'Cập nhật' : 'Chỉnh sửa'}
         </Text>
       </TouchableOpacity>
-      {status === 'đang tìm nhóm' && (
+      {status === 'đang hoạt động' && (
         <View style={styles.statusTag}>
-          <MaterialIcons name="group" size={16} color="green" />
-          <Text style={{ color: 'green', marginLeft: 4 }}>Tìm nhóm</Text>
+          <MaterialIcons name="check-circle" size={16} color="#34C759" />
+          <Text style={{ color: '#34C759', marginLeft: 4, fontWeight: '600' }}>
+            Đang hoạt động
+          </Text>
         </View>
       )}
-      {status === 'đã có nhóm' && (
+      {status === 'nghỉ phép' && (
         <View style={styles.statusTag}>
-          <MaterialIcons name="group" size={16} color="blue" />
-          <Text style={{ color: 'blue', marginLeft: 4 }}>Đã có nhóm</Text>
+          <MaterialIcons name="event-busy" size={16} color="#FF9500" />
+          <Text style={{ color: '#FF9500', marginLeft: 4, fontWeight: '600' }}>
+            Nghỉ phép
+          </Text>
+        </View>
+      )}
+      {status === 'bận' && (
+        <View style={styles.statusTag}>
+          <MaterialIcons name="schedule" size={16} color="#FF3B30" />
+          <Text style={{ color: '#FF3B30', marginLeft: 4, fontWeight: '600' }}>
+            Bận
+          </Text>
         </View>
       )}
     </View>

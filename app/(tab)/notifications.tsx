@@ -1,13 +1,13 @@
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 
 // Mock notification data
 const mockNotifications = [
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FF7A00',
     padding: 20,
     paddingTop: 10,
   },
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   unreadNotification: {
     borderLeftWidth: 4,
-    borderLeftColor: '#007AFF',
+    borderLeftColor: '#FF7A00',
   },
   notificationIcon: {
     width: 40,
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FF7A00',
     marginLeft: 8,
     marginTop: 8,
   },
   markAllReadButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FF7A00',
     margin: 15,
     padding: 15,
     borderRadius: 12,

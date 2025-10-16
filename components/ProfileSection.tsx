@@ -57,7 +57,7 @@ export default function ProfileSection({
         )}
       </View>
       <View style={styles.card}>
-        <Text style={styles.label}>Contact</Text>
+        <Text style={styles.label}>📧 Liên hệ</Text>
         {profile.contact.map((item) => (
           <View
             key={item.id}
@@ -103,7 +103,7 @@ export default function ProfileSection({
         )}
       </View>
       <View style={styles.card}>
-        <Text style={styles.label}>Skills</Text>
+        <Text style={styles.label}>🎓 Trình độ học vấn & Bằng cấp</Text>
         {isEditing ? (
           <>
             {profile.skills.map((item, index) => (
@@ -127,7 +127,13 @@ export default function ProfileSection({
             ))}
           </>
         ) : (
-          <Text>{profile.skills.join(', ')}</Text>
+          <View>
+            {profile.skills.map((item, index) => (
+              <Text key={index} style={{ marginBottom: 8, lineHeight: 20 }}>
+                • {item}
+              </Text>
+            ))}
+          </View>
         )}
         {isEditing && (
           <TouchableOpacity onPress={onAddSkill} style={styles.addButton}>
@@ -137,7 +143,7 @@ export default function ProfileSection({
         )}
       </View>
       <View style={styles.card}>
-        <Text style={styles.label}>Interested</Text>
+        <Text style={styles.label}>💼 Kinh nghiệm & Nghiên cứu</Text>
         {isEditing ? (
           <>
             {profile.interested.map((item, index) => (
@@ -161,7 +167,13 @@ export default function ProfileSection({
             ))}
           </>
         ) : (
-          <Text>{profile.interested.join(', ')}</Text>
+          <View>
+            {profile.interested.map((item, index) => (
+              <Text key={index} style={{ marginBottom: 8, lineHeight: 20 }}>
+                ✓ {item}
+              </Text>
+            ))}
+          </View>
         )}
         {isEditing && (
           <TouchableOpacity onPress={onAddInterest} style={styles.addButton}>

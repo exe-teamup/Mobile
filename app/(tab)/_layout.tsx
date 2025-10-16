@@ -20,25 +20,25 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Dashboard',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <IconSymbol size={28} name="chart.bar.fill" color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="post"
         options={{
-          title: 'Post',
+          title: 'Nhóm của tôi',
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="plus.circle.fill" color={color} />
+            <IconSymbol size={28} name="person.2.fill" color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="notifications"
         options={{
-          title: 'Notifications',
+          title: 'Thông báo',
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="bell.fill" color={color} />
           ),
@@ -47,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Hồ sơ',
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="person.fill" color={color} />
           ),

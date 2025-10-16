@@ -1,7 +1,9 @@
+import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  Alert,
   ActivityIndicator,
+  Alert,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -10,10 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
 import { Colors } from '../../constants/theme';
-import { MMKV } from 'react-native-mmkv';
-import { FontAwesome } from '@expo/vector-icons';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -24,57 +23,51 @@ export default function LoginScreen() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const storage = new MMKV();
-
   const onLogin = () => {
     // reset errors
     setEmailError('');
     setPasswordError('');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Validate empty fields
     let ok = true;
     if (!email) {
       setEmailError('Vui lòng nhập email');
-      ok = false;
-    } else if (!emailRegex.test(email)) {
-      setEmailError('Email không hợp lệ');
       ok = false;
     }
 
     if (!password) {
       setPasswordError('Vui lòng nhập mật khẩu');
       ok = false;
-    } else if (password.length < 8) {
-      setPasswordError('Mật khẩu phải có ít nhất 8 ký tự');
-      ok = false;
     }
 
     if (!ok) return;
 
-    // mock login flow
+    // Check credentials
+    const CORRECT_EMAIL = 'giangvienexe@fpt.com';
+    const CORRECT_PASSWORD = '123456';
+
+    if (email !== CORRECT_EMAIL || password !== CORRECT_PASSWORD) {
+      Alert.alert(
+        'Đăng nhập thất bại',
+        'Email hoặc mật khẩu không chính xác. Vui lòng thử lại!'
+      );
+      return;
+    }
+
+    // Login success
     setLoading(true);
     setTimeout(() => {
-      // mock token
-      const mockToken = 'mock-token-123456';
-      try {
-        storage.set('token', mockToken);
-      } catch (e) {
-        // ignore storage errors in demo
-        console.warn('MMKV set error', e);
-      }
       setLoading(false);
-      router.replace('/');
-    }, 1200);
+      router.replace('/(tab)');
+    }, 1000);
   };
 
   const onGoogle = () => {
-    // mock Google Sign-In
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      storage.set('token', 'google-mock-token');
-      router.replace('/');
-    }, 1000);
+    // Google Sign-In - Tạm thời chưa làm
+    Alert.alert(
+      'Thông báo',
+      'Chức năng đăng nhập với Google đang được phát triển'
+    );
   };
 
   return (
@@ -93,7 +86,7 @@ export default function LoginScreen() {
         <TextInput
           value={email}
           onChangeText={(text) => setEmail(text)}
-          placeholder="you@example.com"
+          placeholder="giangvienexe@fpt.com"
           style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -107,7 +100,7 @@ export default function LoginScreen() {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder="********"
+            placeholder="123456"
             secureTextEntry={!showPassword}
             style={[styles.input, { flex: 1 }]}
             accessibilityLabel="Mật khẩu"
@@ -126,7 +119,7 @@ export default function LoginScreen() {
 
         <TouchableOpacity
           style={styles.forgotWrap}
-          onPress={() => Alert.alert('Loss Password?', 'Demo')}
+          onPress={() => router.push('/screen/ForgotPasswordScreen')}
         >
           <Text style={styles.forgot}>Loss Password ?</Text>
         </TouchableOpacity>

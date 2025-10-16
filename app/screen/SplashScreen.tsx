@@ -43,11 +43,11 @@ export default function SplashScreen() {
   };
 
   const onPress = () => {
-    // replace so user can't go back
+    // Navigate to Login screen
     try {
-      router.replace('/');
+      router.replace('/screen/LoginScreen');
     } catch {
-      router.push('/');
+      router.push('/screen/LoginScreen');
     }
   };
 
@@ -79,14 +79,14 @@ export default function SplashScreen() {
 
         <View style={styles.headlineWrap}>
           <Text style={styles.headline}>
-            Find Your{`\n`}
-            <Text style={styles.headlineAccent}>Dream Team{`\n`}</Text>
+            Manage Your{`\n`}
+            <Text style={styles.headlineAccent}>EXE Team{`\n`}</Text>
             Here!
           </Text>
         </View>
 
         <Text style={styles.subtext}>
-          Tìm kiếm nhóm phù hợp dựa trên mục tiêu và năng lực của bạn.
+          Quản lý các nhóm của môn dự án khởi nghiệp của bạn
         </Text>
       </View>
 
