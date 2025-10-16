@@ -58,7 +58,7 @@ export default function HomeScreen() {
           <View style={styles.headerTop}>
             <View>
               <ThemedText type="defaultSemiBold" style={styles.greeting}>
-                Hi, Minh An!
+                Hi, Nguyễn Văn Minh!
               </ThemedText>
               <ThemedText type="subtitle" style={styles.headerSubtitle}>
                 Find your dream team here
@@ -128,7 +128,7 @@ export default function HomeScreen() {
             },
             {
               label: 'Kỹ thuật',
-              icon: require('@/assets/images/react-logo@2x.png'),
+              icon: require('@/assets/images/icon.png'),
               count: 4,
             },
             {
@@ -142,7 +142,7 @@ export default function HomeScreen() {
               count: 10,
             },
             {
-              label: 'Trí tuệ nhân',
+              label: 'Trí tuệ nhân tạo',
               icon: require('@/assets/images/Group 67.png'),
               count: 2,
             },

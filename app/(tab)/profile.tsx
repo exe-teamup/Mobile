@@ -7,17 +7,26 @@ import { Alert, ScrollView, View } from 'react-native';
 
 const MOCK_PROFILE = {
   avatar: avatarImg,
-  name: 'Nguyễn Văn A',
-  major: 'Công nghệ thông tin',
-  bio: 'Sinh viên năm 3, đam mê lập trình và phát triển ứng dụng di động',
+  name: 'TS. Nguyễn Văn Minh',
+  major: 'Khoa Công nghệ thông tin',
+  bio: 'Giảng viên chính, chuyên gia về Công nghệ phần mềm và Quản lý dự án. Tận tâm hướng dẫn sinh viên phát triển kỹ năng thực tế.',
   contact: [
-    { id: '1', icon: 'facebook', link: 'facebook.com/nguyenvana' },
-    { id: '2', icon: 'linkedin', link: 'linkedin.com/in/nguyenvana' },
-    { id: '3', icon: 'github', link: 'github.com/nguyenvana' },
+    { id: '1', icon: 'mail', link: 'minhnv@fpt.edu.vn' },
+    { id: '2', icon: 'call', link: '+84 912 345 678' },
+    { id: '3', icon: 'linkedin', link: 'linkedin.com/in/nguyenvanminh' },
   ],
-  skills: ['React Native', 'JavaScript', 'TypeScript'],
-  interested: ['Mobile Development', 'UI/UX Design', 'Machine Learning'],
-  status: 'đang tìm nhóm',
+  skills: [
+    'Tiến sĩ Công nghệ thông tin - ĐH Bách Khoa (2015)',
+    'Thạc sĩ Kỹ thuật phần mềm - ĐH Quốc gia (2010)',
+    'Kỹ sư CNTT - ĐH FPT (2008)',
+  ],
+  interested: [
+    '12 năm giảng dạy tại FPT University',
+    '8 năm kinh nghiệm làm Software Architect tại FPT Software',
+    '15+ bài báo khoa học về AI và Machine Learning',
+    'Hướng dẫn 50+ nhóm dự án thành công',
+  ],
+  status: 'đang hoạt động',
 };
 
 export default function ProfileScreen() {

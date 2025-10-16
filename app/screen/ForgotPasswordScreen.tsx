@@ -1,6 +1,6 @@
+import { useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import {
-  Alert,
   Animated,
   Image,
   Keyboard,
@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
 import { Colors } from '../../constants/theme';
 
 export default function ForgotPasswordScreen() {
@@ -33,25 +32,32 @@ export default function ForgotPasswordScreen() {
   const onRecover = () => {
     setError('');
     Keyboard.dismiss();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!email) {
       setError('Vui lòng nhập email');
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError('Email không hợp lệ');
       return;
     }
 
+    // Check if email is correct
+    const CORRECT_EMAIL = 'giangvienexe@fpt.com';
+    if (email !== CORRECT_EMAIL) {
+      setError('Email không tồn tại trong hệ thống');
+      return;
+    }
+
     setLoading(true);
-    // mock API
+    // Simulate sending email
     setTimeout(() => {
       setLoading(false);
-      Alert.alert(
-        'Yêu cầu đã gửi',
-        'Vui lòng kiểm tra email để khôi phục mật khẩu (demo)'
-      );
-    }, 1200);
+      // Navigate to CheckEmailScreen
+      router.push('/screen/CheckEmailScreen');
+    }, 1500);
   };
 
   return (
@@ -96,11 +102,12 @@ export default function ForgotPasswordScreen() {
         <TextInput
           value={email}
           onChangeText={setEmail}
-          placeholder="you@example.com"
+          placeholder="giangvienexe@fpt.com"
           style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
         />
+        {error ? <Text style={styles.error}>{error}</Text> : null}
 
         <TouchableOpacity
           style={[styles.recoverButton, loading ? styles.disabled : null]}
@@ -113,7 +120,6 @@ export default function ForgotPasswordScreen() {
             {loading ? 'Đang gửi...' : 'KHÔI PHỤ MẬT KHẨU'}
           </Text>
         </TouchableOpacity>
-        {error ? <Text style={styles.error}>{error}</Text> : null}
 
         <TouchableOpacity
           style={styles.backButton}

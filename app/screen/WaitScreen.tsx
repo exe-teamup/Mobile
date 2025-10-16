@@ -17,7 +17,7 @@ type WaitScreenProps = {
 };
 
 export default function WaitScreen({
-  duration = 2500,
+  duration = 5000,
   logoSize = 200,
   showText = false,
   text = '',
@@ -44,9 +44,9 @@ export default function WaitScreen({
 
     const timeout = setTimeout(() => {
       try {
-        router.replace('/');
+        router.replace('/screen/SplashScreen');
       } catch {
-        router.push('/');
+        router.push('/screen/SplashScreen');
       }
     }, duration);
 

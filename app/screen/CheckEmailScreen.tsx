@@ -29,7 +29,7 @@ export default function CheckEmailScreen() {
       setCount(remaining);
       if (remaining <= 0) {
         clearInterval(interval);
-        router.replace('/');
+        router.replace('/screen/LoginScreen');
       }
     }, 1000);
 
@@ -39,7 +39,7 @@ export default function CheckEmailScreen() {
   const [count, setCount] = useState(5);
 
   const onBack = () => {
-    router.replace('/');
+    router.replace('/screen/LoginScreen');
   };
 
   const onResend = () => {

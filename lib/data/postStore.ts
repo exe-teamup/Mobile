@@ -3,6 +3,8 @@ type Post = {
   title: string;
   description: string;
   tags?: string[];
+  hashtags?: string[];
+  contact?: string;
   fields?: Record<string, string>;
 };
 

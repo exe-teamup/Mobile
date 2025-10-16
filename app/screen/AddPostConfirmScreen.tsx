@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import EXEButton from '@/components/ui/EXEButton';
 import { getPost } from '@/lib/data/postStore';
-import { useRouter } from 'expo-router';
-import {
-  StyleSheet,
-  View,
-  Image,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
 import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function AddPostConfirmScreen() {
   const router = useRouter();
