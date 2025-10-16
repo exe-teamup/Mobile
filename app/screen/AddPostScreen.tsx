@@ -204,7 +204,7 @@ export default function AddPostScreen() {
         {/* Contact Section */}
         <View style={{ marginTop: 16 }}>
           <ThemedText style={{ fontSize: 13, marginBottom: 8 }}>
-            🔍 Nhập tên, email để tìm ở mẫt 2 thành viên
+            🔍 Nhập tên, email để tìm ở mất 2 thành viên
           </ThemedText>
           <ThemedText style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
             Đã chọn 1/2
